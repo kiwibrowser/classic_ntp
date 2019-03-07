@@ -1,4 +1,4 @@
-Copyright 2018 Kiwi Browser
+Copyright 2019 Geometry OU / Kiwi Browser
 
 Licensed under https://creativecommons.org/licenses/by-nc-sa/4.0/
 
