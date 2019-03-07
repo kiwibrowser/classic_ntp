@@ -660,7 +660,6 @@ function render_gnews(answer, start_offset, n)
               var news_time = null;
               for (var j = 0; j < children.length; j++) {
                   var child = children[j];
-                  // this is a title
                   if (child.tagName == 'A')
                   {
                       link = child.href;
@@ -677,6 +676,14 @@ function render_gnews(answer, start_offset, n)
                           image = child.childNodes[1].src;
                           is_primary = true;
                       }
+                      else if (child.childNodes.length == 1 && child.childNodes[0].tagName == 'SOURCE')
+                      {
+                          image = child.childNodes[0].src;
+                      }
+                  }
+                  else if (child.tagName == 'H4')
+                  {
+                      title = child.childNodes[0].innerText;
                   }
                   else if (child.tagName == 'DIV')
                   {
@@ -728,9 +735,24 @@ function render_gnews(answer, start_offset, n)
                           if (divSubNode.childNodes.length == 3 && divSubNode.childNodes[1].tagName == 'H4')
                               title = divSubNode.childNodes[1].innerText;
                       }
+                      else if (child.childNodes.length == 1 && child.childNodes[0].tagName == 'A')
+                      {
+                          subNode = child.childNodes[0];
+                          source = subNode.innerText;
+                          var sourceNode = subNode.childNodes[0];
+                          if (sourceNode.tagName == 'SOURCE')
+                             source_logo = sourceNode.src;
+                      }
+                      else if (child.childNodes.length >= 2 && child.childNodes[0].tagName == 'SPAN')
+                      {
+                          source = child.childNodes[1].innerText;
+                          var sourceNode = child.childNodes[0].childNodes[0];
+                          if (sourceNode.tagName == 'SOURCE')
+                             source_logo = sourceNode.src;
+                      }
                   }
               }
- 
+
               if (news_time && parseInt(news_time.substr(news_time.lastIndexOf(":") + 2)) > 1518000000)
                   news_time = parseInt(news_time.substr(news_time.lastIndexOf(":") + 2));
               else
