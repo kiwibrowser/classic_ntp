@@ -743,6 +743,13 @@ function render_gnews(answer, start_offset, n)
                           if (sourceNode.tagName == 'SOURCE')
                              source_logo = sourceNode.src;
                       }
+                      else if (child.childNodes.length >= 2 && child.childNodes[0].tagName == 'A')
+                      {
+                          source = child.childNodes[1].innerText;
+                          var sourceNode = child.childNodes[0].childNodes[0];
+                          if (sourceNode.tagName == 'SOURCE')
+                             source_logo = sourceNode.src;
+                      }
                       else if (child.childNodes.length >= 2 && child.childNodes[0].tagName == 'SPAN')
                       {
                           source = child.childNodes[1].innerText;
